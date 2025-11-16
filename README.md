@@ -3,7 +3,7 @@
 ## Trabajo Práctico Integrador – Programación II  
 **Aplicación Java con relación 1→1 unidireccional + DAO + MySQL + Transacciones ACID**
 
-![alt text](image.png)
+![alt text](uml/logo.png)
 
 ---
 
