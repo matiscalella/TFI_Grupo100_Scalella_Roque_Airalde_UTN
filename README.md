@@ -9,17 +9,17 @@
 
 # 📑 Índice
 
-- [🐾 TFI Programación II – Gestión de Mascotas-Microchips](#-tfi-programación-ii--gestión-de-mascotas-microchips)
-  - [Trabajo Práctico Integrador – Programación II](#trabajo-práctico-integrador--programación-ii)
-- [📑 Índice](#-índice)
-- [1. Descripción del Proyecto](#1-descripción-del-proyecto)
-- [2. Dominio Seleccionado y Justificación](#2-dominio-seleccionado-y-justificación)
+- [🐾 TFI Programación II – Gestión de Mascotas-Microchips](#-tfi-programacion-ii--gestion-de-mascotas-microchips)
+  - [Trabajo Práctico Integrador – Programación II](#trabajo-práctico-integrador--programacion-ii)
+- [📑 Índice](#-indice)
+- [1. Descripción del Proyecto](#1-descripcion-del-proyecto)
+- [2. Dominio Seleccionado y Justificación](#2-dominio-seleccionado-y-justificacion)
     - [Dominio elegido](#dominio-elegido)
-    - [Justificación funcional](#justificación-funcional)
-    - [Justificación técnica](#justificación-técnica)
-- [3. Objetivos Académicos](#3-objetivos-académicos)
+    - [Justificación funcional](#justificacion-funcional)
+    - [Justificación técnica](#justificacion-tecnica)
+- [3. Objetivos Académicos](#3-objetivos-academicos)
     - [Arquitectura en capas](#arquitectura-en-capas)
-    - [Programación Orientada a Objetos](#programación-orientada-a-objetos)
+    - [Programación Orientada a Objetos](#programacion-orientada-a-objetos)
     - [Persistencia con JDBC](#persistencia-con-jdbc)
     - [Transacciones ACID](#transacciones-acid)
     - [Validaciones y reglas de negocio](#validaciones-y-reglas-de-negocio)
@@ -34,20 +34,24 @@
 - [6. Transacciones ACID y Lógica de Negocio](#6-transacciones-acid-y-lógica-de-negocio)
     - [Caso transaccional principal: Crear Mascota + Microchip](#caso-transaccional-principal-crear-mascota--microchip)
     - [Ejemplo de fallo simulado](#ejemplo-de-fallo-simulado)
-- [7. Descripción de la Aplicación y Funcionalidades](#7-descripción-de-la-aplicación-y-funcionalidades)
-    - [Ejemplo de Menú Principal](#ejemplo-de-menú-principal)
-    - [Funcionalidades Clave](#funcionalidades-clave)
+- [7. Descripción de la Aplicación y Funcionalidades](#7-descripcion-de-la-aplicacion-y-funcionalidades)
+    - [Menú Mascotas](#menu-mascotas)
+    - [Menú Microchips](#menu-microchips)
+    - [Menú Transacciones](#menu-transacciones)
+    - [Funcionalidades Clave del Menu Mascota](#funcionalidades-clave-del-menu-mascota)
+    - [Funcionalidades Clave del Menu Microchip](#funcionalidades-clave-del-menu-microchip)
+    - [Funcionalidades Clave del Menu Transacciones](#funcionalidades-clave-del-menu-transacciones)
 - [8. Pruebas Realizadas](#8-pruebas-realizadas)
-- [9. Requisitos del Sistema, Instalación y Ejecución](#9-requisitos-del-sistema-instalación-y-ejecución)
+- [9. Requisitos del Sistema, Instalación y Ejecución](#9-requisitos-del-sistema-instalacion-y-ejecucion)
   - [Requisitos](#requisitos)
-  - [Instalación de la Base de Datos](#instalación-de-la-base-de-datos)
-  - [Ejecución del Proyecto](#ejecución-del-proyecto)
+  - [Instalación de la Base de Datos](#instalacion-de-la-base-de-datos)
+  - [Ejecución del Proyecto](#ejecucion-del-proyecto)
     - [Desde un IDE (NetBeans)](#desde-un-ide-netbeans)
-    - [Desde línea de comandos (ejemplo general)](#desde-línea-de-comandos-ejemplo-general)
+    - [Desde línea de comandos (ejemplo general)](#desde-linea-de-comandos-ejemplo-general)
 - [10. Conclusiones y Mejoras Futuras](#10-conclusiones-y-mejoras-futuras)
     - [Conclusiones](#conclusiones)
     - [Mejoras Futuras](#mejoras-futuras)
-- [11. Video de Presentación](#11-video-de-presentación)
+- [11. Video de Presentación](#11-video-de-presentacion)
 
 ---
 
@@ -319,36 +323,81 @@ La aplicación es una app de consola que permite gestionar:
 
 Mediante un menú interactivo, se exponen las operaciones CRUD para ambas entidades y funcionalidades adicionales relacionadas con la transacción.
 
-### Ejemplo de Menú Principal
+### Menú Principal
 
 ```text
------ GESTIÓN DE MASCOTAS Y MICROCHIPS -----
-1. Crear Mascota
-2. Listar Mascotas
-3. Buscar Mascota por ID
-4. Actualizar Mascota
-5. Eliminar Mascota (lógica)
---------------------------------------------
-6. Crear Microchip
-7. Listar Microchips
-8. Buscar Microchip por ID
-9. Actualizar Microchip
-10. Eliminar Microchip (lógica)
---------------------------------------------
-11. Crear Mascota + Microchip (Transacción ACID)
---------------------------------------------
-0. Salir
+------ MENU PRINCIPAL ------ 
+[1] Gestionar MASCOTAS
+[2] Gestionar MICROCHIPS
+[3] Mostrar mascotas con microchips (vista)
+[4] Transacciones
+[0] Salir
+Seleccione una opción:
 ```
 
-### Funcionalidades Clave
+### Menú Mascotas
 
-- **Crear Mascota**: Solicita datos obligatorios y opcionales, valida y persiste.  
-- **Listar Mascotas**: Muestra todas las mascotas activas (eliminado = false).  
-- **Actualizar Mascota**: Permite modificar campos, manteniendo los valores anteriores si se deja en blanco.  
-- **Eliminar Mascota (lógica)**: Marca `eliminado = true` en lugar de borrar físicamente.  
-- **Crear Microchip**: Vincula un microchip a una mascota existente, respetando la relación 1→1.  
-- **Listar Microchips**: Lista todos los microchips activos.  
-- **Transacción Mascota + Microchip**: Crea ambos registros en una única operación ACID.  
+```text
+ ------ GESTION DE MASCOTAS ------ 
+[1] Crear mascota
+[2] Listar mascota
+[3] Buscar mascota por ID
+[4] Actualizar mascota
+[5] Eliminar mascota
+[6] Buscar mascota por nombre
+[0] Volver al menu principal
+------ --------------------- ------ 
+Seleccione una opción:
+```
+
+### Menú Microchips
+
+```text
+ ------ GESTION DE MICROCHIPS ------ 
+[1] Crear microchip
+[2] Listar microchips
+[3] Buscar microchip por ID
+[4] Actualizar microchip
+[5] Eliminar microchip
+[6] Buscar microchip por código
+[0] Volver al menu principal
+------ --------------------- ------ 
+Seleccione una opción:
+```
+
+### Menú Transacciones
+
+```text
+------ TRANSACCIONES ------ 
+[1] Crear mascota y microchip (Transacción ACID)
+[2] Actualizar mascota y microchip
+[3] Eliminar mascota y microchip asociado
+[0] Volver al menu principal
+------ --------------------- ------
+```
+
+### Funcionalidades Clave del Menu Mascota
+
+- **Crear Mascota**: Solicita datos obligatorios y opcionales, valida y persiste (opcionalmente permite agregar Microchip).
+- **Listar Mascota**: Muestra todas las mascotas activas (eliminado = false).
+- **Buscar mascota por ID**: Solicita al usuario un ID y lo muestra. 
+- **Actualizar Mascota**: Permite modificar campos, manteniendo los valores anteriores si se deja en blanco.
+- **Eliminar Mascota (mediante baja lógica)**: Marca eliminado = true en lugar de borrar físicamente. 
+- **Buscar mascota por nombre**: Solicita al usuario un nombre y busca coincidentes totales o parciales.
+
+### Funcionalidades Clave del Menu Microchip
+
+- **Crear Microchip**: Vincula un microchip a una mascota existente, respetando la relación 1→1.
+- **Listar Microchips**: Lista todos los microchips activos.
+- **Buscar microchip por ID**: Solicita al usuario un ID y muestra el microchip (si existe).
+- **Actualizar Microchip**: Permite modificar campos, manteniendo los valores anteriores si se deja en blanco. 
+- **Eliminar microchip (mediante baja lógica)**: Marca eliminado = true en lugar de borrar físicamente. - **Buscar microchip por código**: Solicita al usuario un codigo y busca coincidentes totales o parciales. 
+
+### Funcionalidades Clave del Menu Transacciones
+
+- **Crear mascota y microchip (Transacción ACID)**: Crea ambos registros en una única operación ACID.
+- **Actualizar mascota y microchip**: Permite actualizar una mascota y su microchip en una única operación ACID (mejora a futuro - pendiente, no obligatorio para el tp).
+- **Eliminar mascota y microchip asociado**: Permite eliminar una mascota y su microchip en una única operación ACID (mejora a futuro - pendiente, no obligatorio para el tp). 
 
 ---
 
