@@ -9,17 +9,17 @@
 
 # 📑 Índice
 
-- [🐾 TFI Programación II – Gestión de Mascotas-Microchips](#-tfi-programacion-ii--gestion-de-mascotas-microchips)
-  - [Trabajo Práctico Integrador – Programación II](#trabajo-práctico-integrador--programacion-ii)
+- [🐾 TFI Programacion II – Gestion de Mascotas-Microchips](#-tfi-programacion-ii--gestion-de-mascotas-microchips)
+  - [Trabajo Practico Integrador – Programacion II](#trabajo-practico-integrador--programacion-ii)
 - [📑 Índice](#-indice)
-- [1. Descripción del Proyecto](#1-descripcion-del-proyecto)
-- [2. Dominio Seleccionado y Justificación](#2-dominio-seleccionado-y-justificacion)
+- [1. Descripcion del Proyecto](#1-descripcion-del-proyecto)
+- [2. Dominio Seleccionado y Justificacion](#2-dominio-seleccionado-y-justificacion)
     - [Dominio elegido](#dominio-elegido)
-    - [Justificación funcional](#justificacion-funcional)
-    - [Justificación técnica](#justificacion-tecnica)
-- [3. Objetivos Académicos](#3-objetivos-academicos)
+    - [Justificacion funcional](#justificacion-funcional)
+    - [Justificacion tecnica](#justificacion-tecnica)
+- [3. Objetivos Academicos](#3-objetivos-academicos)
     - [Arquitectura en capas](#arquitectura-en-capas)
-    - [Programación Orientada a Objetos](#programacion-orientada-a-objetos)
+    - [Programacion Orientada a Objetos](#programacion-orientada-a-objetos)
     - [Persistencia con JDBC](#persistencia-con-jdbc)
     - [Transacciones ACID](#transacciones-acid)
     - [Validaciones y reglas de negocio](#validaciones-y-reglas-de-negocio)
@@ -28,35 +28,36 @@
   - [4.2 Diagrama UML (Referencia)](#42-diagrama-uml-referencia)
 - [5. Modelo de Datos](#5-modelo-de-datos)
   - [5.1 Estructura de la Base y Restricciones](#51-estructura-de-la-base-y-restricciones)
-    - [Tabla `mascotas`](#tabla-mascotas)
-    - [Tabla `microchips`](#tabla-microchips)
+    - [Tabla mascotas](#tabla-mascotas)
+    - [Tabla microchips](#tabla-microchips)
   - [5.2 Sentencias SQL (Estructura Completa)](#52-sentencias-sql-estructura-completa)
-- [6. Transacciones ACID y Lógica de Negocio](#6-transacciones-acid-y-lógica-de-negocio)
+- [6. Transacciones ACID y Logica de Negocio](#6-transacciones-acid-y-logica-de-negocio)
     - [Caso transaccional principal: Crear Mascota + Microchip](#caso-transaccional-principal-crear-mascota--microchip)
     - [Ejemplo de fallo simulado](#ejemplo-de-fallo-simulado)
-- [7. Descripción de la Aplicación y Funcionalidades](#7-descripcion-de-la-aplicacion-y-funcionalidades)
-    - [Menú Mascotas](#menu-mascotas)
-    - [Menú Microchips](#menu-microchips)
-    - [Menú Transacciones](#menu-transacciones)
+- [7. Descripcion de la Aplicacion y Funcionalidades](#7-descripcion-de-la-aplicacion-y-funcionalidades)
+    - [Menu Mascotas](#menu-mascotas)
+    - [Menu Microchips](#menu-microchips)
+    - [Menu Transacciones](#menu-transacciones)
     - [Funcionalidades Clave del Menu Mascota](#funcionalidades-clave-del-menu-mascota)
     - [Funcionalidades Clave del Menu Microchip](#funcionalidades-clave-del-menu-microchip)
     - [Funcionalidades Clave del Menu Transacciones](#funcionalidades-clave-del-menu-transacciones)
 - [8. Pruebas Realizadas](#8-pruebas-realizadas)
-- [9. Requisitos del Sistema, Instalación y Ejecución](#9-requisitos-del-sistema-instalacion-y-ejecucion)
+- [9. Requisitos del Sistema, Instalacion y Ejecucion](#9-requisitos-del-sistema-instalacion-y-ejecucion)
   - [Requisitos](#requisitos)
-  - [Instalación de la Base de Datos](#instalacion-de-la-base-de-datos)
-  - [Ejecución del Proyecto](#ejecucion-del-proyecto)
+  - [Instalacion de la Base de Datos](#instalacion-de-la-base-de-datos)
+  - [Ejecucion del Proyecto](#ejecucion-del-proyecto)
     - [Desde un IDE (NetBeans)](#desde-un-ide-netbeans)
-    - [Desde línea de comandos (ejemplo general)](#desde-linea-de-comandos-ejemplo-general)
+    - [Desde linea de comandos (ejemplo general)](#desde-linea-de-comandos-ejemplo-general)
 - [10. Conclusiones y Mejoras Futuras](#10-conclusiones-y-mejoras-futuras)
     - [Conclusiones](#conclusiones)
     - [Mejoras Futuras](#mejoras-futuras)
-- [11. Video de Presentación](#11-video-de-presentacion)
+- [11. Video de Presentacion](#11-video-de-presentacion)
+
 
 ---
 
 <a id="descripcion-del-proyecto"></a>
-# 1. Descripción del Proyecto
+# 1. Descripcion del Proyecto
 
 Este Trabajo Práctico Integrador desarrolla un sistema completo de gestión para **Mascotas** y **Microchips**, utilizando:
 
@@ -73,19 +74,19 @@ El objetivo es demostrar dominio de Programación Orientada a Objetos, persisten
 ---
 
 <a id="dominio-seleccionado-y-justificacion"></a>
-# 2. Dominio Seleccionado y Justificación
+# 2. Dominio Seleccionado y Justificacion
 
 ### Dominio elegido
 
 Se seleccionó el dominio **Mascota → Microchip**, donde cada mascota puede tener asociado exactamente un microchip identificatorio.
 
-### Justificación funcional
+### Justificacion funcional
 
 - Representa un caso realista de la vida cotidiana (veterinarias, refugios, registros municipales).  
 - La relación es naturalmente 1→1: una mascota tiene un microchip principal asociado.  
 - Permite aplicar validaciones de unicidad, integridad referencial y vistas combinadas.  
 
-### Justificación técnica
+### Justificacion tecnica
 
 - Se garantiza 1→1 mediante una **clave foránea única** en la tabla `microchips`:
   - `microchips.mascota_id` es `UNIQUE` y `NOT NULL`.  
@@ -98,7 +99,7 @@ Este diseño refleja la relación unidireccional 1→1 solicitada en el TFI, apl
 ---
 
 <a id="objetivos-academicos"></a>
-# 3. Objetivos Académicos
+# 3. Objetivos Academicos
 
 El proyecto permite aplicar y consolidar los siguientes conceptos fundamentales de la materia:
 
@@ -111,7 +112,8 @@ El proyecto permite aplicar y consolidar los siguientes conceptos fundamentales 
   - `entities/` → modelo de dominio (Mascota, Microchip, Base)  
   - `main/` → menú de consola y flujo de interacción con el usuario  
 
-### Programación Orientada a Objetos
+<a id="programacion-orientada-a-objetos"></a>
+### Programacion Orientada a Objetos
 
 - Uso de una clase base (`Base`) con atributos comunes (`id`, `eliminado`).  
 - Encapsulamiento de atributos con getters y setters.  
@@ -286,7 +288,7 @@ WHERE m.eliminado = false;
 ---
 
 <a id="transacciones-acid-y-logica-de-negocio"></a>
-# 6. Transacciones ACID y Lógica de Negocio
+# 6. Transacciones ACID y Logica de Negocio
 
 El sistema implementa transacciones para garantizar las propiedades ACID en operaciones compuestas:
 
@@ -314,7 +316,7 @@ Para demostrar el rollback, se intenta crear una mascota con un microchip cuyo `
 ---
 
 <a id="descripcion-de-la-aplicacion-y-funcionalidades"></a>
-# 7. Descripción de la Aplicación y Funcionalidades
+# 7. Descripcion de la Aplicacion y Funcionalidades
 
 La aplicación es una app de consola que permite gestionar:
 
@@ -323,7 +325,7 @@ La aplicación es una app de consola que permite gestionar:
 
 Mediante un menú interactivo, se exponen las operaciones CRUD para ambas entidades y funcionalidades adicionales relacionadas con la transacción.
 
-### Menú Principal
+### Menu Principal
 
 ```text
 ------ MENU PRINCIPAL ------ 
@@ -334,8 +336,8 @@ Mediante un menú interactivo, se exponen las operaciones CRUD para ambas entida
 [0] Salir
 Seleccione una opción:
 ```
-
-### Menú Mascotas
+<a id="menu-mascotas"></a>
+### Menu Mascotas
 
 ```text
  ------ GESTION DE MASCOTAS ------ 
@@ -349,8 +351,8 @@ Seleccione una opción:
 ------ --------------------- ------ 
 Seleccione una opción:
 ```
-
-### Menú Microchips
+<a id="menu-microchips"></a>
+### Menu Microchips
 
 ```text
  ------ GESTION DE MICROCHIPS ------ 
@@ -364,8 +366,8 @@ Seleccione una opción:
 ------ --------------------- ------ 
 Seleccione una opción:
 ```
-
-### Menú Transacciones
+<a id="menu-transacciones"></a>
+### Menu Transacciones
 
 ```text
 ------ TRANSACCIONES ------ 
@@ -425,7 +427,7 @@ Los resultados confirman que el sistema cumple con los requisitos de:
 ---
 
 <a id="requisitos-del-sistema-instalacion-y-ejecucion"></a>
-# 9. Requisitos del Sistema, Instalación y Ejecución
+# 9. Requisitos del Sistema, Instalacion y Ejecucion
 
 ## Requisitos
 
@@ -436,7 +438,7 @@ Los resultados confirman que el sistema cumple con los requisitos de:
 | IDE            | NetBeans (recomendado) |
 | Driver JDBC    | mysql-connector-j-8.4.0.jar |
 
-## Instalación de la Base de Datos
+## Instalacion de la Base de Datos
 
 1. Abrir el cliente de MySQL (Workbench, DBeaver, consola, etc.).  
 2. Ejecutar el script `01_estructura.sql` para crear la base, tablas y vista.  
@@ -449,7 +451,7 @@ SELECT * FROM microchips;
 SELECT * FROM vista_mascotas_con_microchip;
 ```
 
-## Ejecución del Proyecto
+## Ejecucion del Proyecto
 
 ### Desde un IDE (NetBeans)
 
@@ -457,7 +459,7 @@ SELECT * FROM vista_mascotas_con_microchip;
 2. Configurar el classpath con el JAR de MySQL (`mysql-connector-j-8.4.0.jar`).  
 3. Ejecutar la clase `main.Main`.  
 
-### Desde línea de comandos (ejemplo general)
+### Desde linea de comandos (ejemplo general)
 
 ```bash
 javac -cp .;mysql-connector-j-8.x.x.jar -d build src/main/java/**/*.java
@@ -490,7 +492,7 @@ java -cp build;mysql-connector-j-8.x.x.jar main.Main
 ---
 
 <a id="video-de-presentacion"></a>
-# 11. Video de Presentación
+# 11. Video de Presentacion
 
 De acuerdo con las consignas del TFI, se incluye un video de entre 10 y 15 minutos donde:
 
